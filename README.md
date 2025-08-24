@@ -19,4 +19,4 @@ python -m venv .venv; .venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 cp .env.example .env
 # Edit .env (JWT_SECRET, DATABASE_URL if needed); defaults to SQLite for dev
-uvicorn app:app --reload --port 8001
+uvicorn hub.app:app --reload
