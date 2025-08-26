@@ -10,7 +10,9 @@ This repository contains a **Hub** (central API/UI with WebSockets) and a lightw
 
 
 ## Quick Start (Single Robot, Local Dev)
+Run this before activating:
 
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 
 ### 1) Start the Hub
 ```bash
