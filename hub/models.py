@@ -11,8 +11,8 @@ class Robot(Base):
     status: Mapped[str] = mapped_column(String, default="offline")
     last_seen_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     agent_version: Mapped[str | None] = mapped_column(String, nullable=True)
-    runs: Mapped[list["Run"]] = relationship(back_populates="robot")
-
+    # runs: Mapped[list["Run"]] = relationship(back_populates="robot")
+    runs = relationship("Run", back_populates="robot")
 
 class Run(Base):
     __tablename__ = "runs"
@@ -23,7 +23,7 @@ class Run(Base):
     started_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     ended_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     run_metadata: Mapped[dict | None] = mapped_column("metadata", JSON, nullable=True)
-
+    robot = relationship("Robot", back_populates="runs")
 
 robot: Mapped[Robot] = relationship(back_populates="runs")
 

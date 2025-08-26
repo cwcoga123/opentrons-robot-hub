@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Opentrons Robot Dashboard</title>
+</head>
+<body>
+    <h1>Robot: {{ robot.name }}</h1>
+    <p>Status: {{ robot.status }}</p>
+    <p>Last Seen: {{ robot.last_seen_at }}</p>
+    <p>Agent Version: {{ robot.agent_version }}</p>
+
+    <form action="/upload-protocol" method="post" enctype="multipart/form-data">
+        <input type="file" name="protocolFile" required>
+        <button type="submit">Upload Protocol</button>
+    </form>
+
+    <form action="/start-run" method="post">
+        <input type="text" name="protocol_id" placeholder="Protocol ID" required>
+        <button type="submit">Start Run</button>
+    </form>
+</body>
+</html>

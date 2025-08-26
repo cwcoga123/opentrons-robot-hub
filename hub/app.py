@@ -4,15 +4,15 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from datetime import datetime, timezone
 from typing import Optional
-
-
 from .settings import settings
 from .db import Base, engine, SessionLocal
 from .models import Robot, Run, Event
 from .schemas import Command, Telemetry, AgentHello
 from .security import validate_agent_key, create_user_token
 from .websocket_manager import ws_manager
-
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+from hub.routes import ui
 
 app = FastAPI(title="Opentrons Robot Hub")
 app.add_middleware(
@@ -72,3 +72,6 @@ async def agents_ws(websocket: WebSocket):
     except WebSocketDisconnect:
         # ...handle disconnect...
         pass
+
+app.mount("/static", StaticFiles(directory="hub/static"), name="static")
+app.include_router(ui.router)
